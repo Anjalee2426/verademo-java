@@ -19,15 +19,15 @@ jobs:
 
       - name: Package App
         run: |
-         ./veracode package -s . -a
+         ./veracode package -s . -a -o veracode-artifacts
 
       - name: SAST Scan
-        continue-on-error: true
         env:
          VERACODE_API_KEY_ID: ${{ secrets.VERACODE_API_KEY_ID }}
          VERACODE_API_KEY_SECRET: ${{ secrets.VERACODE_API_KEY_SECRET }}
         run: |
-         ./veracode static scan ./verademo.war --summary-output sast-summary.txt
+         ls -la veracode-artifacts/
+         ./veracode static scan veracode-artifacts/*.war --summary-output sast-summary.txt
       
       - name: Upload SAST issues artifact
         uses: actions/upload-artifact@v4.3.3
