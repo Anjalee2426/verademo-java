@@ -6,6 +6,10 @@ on:
   # Runs "Every at 5:04" (see https://crontab.guru)
   schedule:
   - cron: "4 5 * * *"
+  # Runs automatically on every push
+  push:
+    branches:
+      - main
 
 jobs:
   SAST_Scan:
